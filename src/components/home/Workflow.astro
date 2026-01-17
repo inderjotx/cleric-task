@@ -1,0 +1,109 @@
+---
+/**
+ * Workflow Section Component
+ *
+ * Displays the "How it works" section with:
+ * - Section badge
+ * - Title and subtitle
+ * - Responsive workflow diagram (different images per breakpoint)
+ */
+
+import { Image } from "astro:assets";
+
+// Import optimized images from assets
+import workflowMobile from "@/assets/workflow/mobile.png";
+import workflowTablet from "@/assets/workflow/tablet.png";
+import workflowDesktop from "@/assets/workflow/desktop.png";
+
+// =============================================================================
+// Configuration
+// =============================================================================
+
+const CONTENT = {
+  badge: "How it works",
+  title: "Meet Cleric",
+  subtitle:
+    "Cleric investigates problems, surfaces answers, and learns from your engineers.",
+} as const;
+
+// =============================================================================
+// Styles
+// =============================================================================
+
+const STYLES = {
+  section:
+    "relative bg-linear-to-t from-[#f8f8f8] to-[#f7f9fa] py-16 md:py-20 lg:py-30",
+  badge:
+    "bg-[#e0e0e0] flex h-8 items-center justify-center px-4 py-2.5 rounded text-[14px] leading-[1.2] tracking-[-0.035px] text-[#6b6b6b] font-medium text-center",
+  title:
+    "text-[36px] md:text-[44px] lg:text-[48px] leading-[1.15] tracking-[-0.18px] md:tracking-[-0.22px] lg:tracking-[-0.24px] text-[#313131] font-serif text-center w-full",
+  subtitle:
+    "text-[18px] md:text-[20px] lg:text-[24px] leading-tight tracking-[0.135px] md:tracking-[0.15px] lg:tracking-[0.18px] text-[#6b6b6b] font-normal text-center w-full",
+  fontSalt: "font-feature-settings: 'salt'",
+} as const;
+---
+
+<section class={STYLES.section}>
+  <div class="container mx-auto px-4 md:px-10 lg:px-20">
+    <div
+      class="flex flex-col gap-10 md:gap-12 lg:gap-16 items-center max-w-[1600px] mx-auto"
+    >
+      <!-- ======================================================================
+           Header
+           ====================================================================== -->
+      <header
+        class="flex flex-col gap-4 md:gap-5 lg:gap-6 items-center max-w-[960px] w-full"
+      >
+        <!-- Badge -->
+        <span class={STYLES.badge} style={STYLES.fontSalt}>
+          {CONTENT.badge}
+        </span>
+
+        <!-- Title & Subtitle -->
+        <div class="flex flex-col gap-2 items-center w-full">
+          <h2 class={STYLES.title} style={STYLES.fontSalt}>
+            {CONTENT.title}
+          </h2>
+          <p class={STYLES.subtitle} style={STYLES.fontSalt}>
+            {CONTENT.subtitle}
+          </p>
+        </div>
+      </header>
+
+      <!-- ======================================================================
+           Workflow Diagram (Responsive)
+           ====================================================================== -->
+      <div class="w-full flex items-center justify-center">
+        <!-- Mobile -->
+        <div class="block md:hidden w-full">
+          <Image
+            src={workflowMobile}
+            alt="Cleric workflow diagram"
+            class="w-full h-auto object-cover"
+            loading="lazy"
+          />
+        </div>
+
+        <!-- Tablet -->
+        <div class="hidden md:block lg:hidden w-full max-w-[960px]">
+          <Image
+            src={workflowTablet}
+            alt="Cleric workflow diagram"
+            class="w-full h-auto object-cover"
+            loading="lazy"
+          />
+        </div>
+
+        <!-- Desktop -->
+        <div class="hidden lg:block w-full max-w-[1600px]">
+          <Image
+            src={workflowDesktop}
+            alt="Cleric workflow diagram"
+            class="w-full h-auto object-cover"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

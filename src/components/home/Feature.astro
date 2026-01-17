@@ -1,0 +1,143 @@
+---
+/**
+ * Feature Card Component
+ *
+ * A flexible, responsive feature card with:
+ * - Title and description text
+ * - Image with directional gradient fade
+ * - Desktop: Horizontal layout (text left, image right or vice versa)
+ * - Mobile/Tablet: Vertical stacked layout
+ */
+
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+// =============================================================================
+// Types
+// =============================================================================
+
+interface Props {
+  title: string;
+  description: string;
+  image: ImageMetadata;
+  imageDirectionDesktop?: "left" | "right";
+  imageDirectionMobile?: "left" | "right" | "center";
+  gradientDirection?: "bottom" | "left" | "right" | "top";
+}
+
+// =============================================================================
+// Props & Configuration
+// =============================================================================
+
+const {
+  title,
+  description,
+  image,
+  imageDirectionDesktop = "right",
+  imageDirectionMobile = "center",
+  gradientDirection = "bottom",
+} = Astro.props;
+
+// =============================================================================
+// Layout Configuration
+// =============================================================================
+
+// Desktop flex direction based on image position
+const desktopFlexDirection =
+  imageDirectionDesktop === "left" ? "lg:flex-row-reverse" : "lg:flex-row";
+
+// Mobile image alignment
+const MOBILE_ALIGN_MAP = {
+  left: "items-start",
+  center: "items-center",
+  right: "items-end",
+} as const;
+
+const mobileAlignClass = MOBILE_ALIGN_MAP[imageDirectionMobile];
+
+// Gradient overlay configuration by direction
+const GRADIENT_CONFIG = {
+  bottom: {
+    position: "bottom-0 left-1/2 -translate-x-1/2",
+    size: "h-[100px] lg:h-[120px] w-full",
+    gradient: "bg-linear-to-t from-[#f8f8f8] to-transparent",
+  },
+  top: {
+    position: "top-0 left-1/2 -translate-x-1/2",
+    size: "h-[100px] lg:h-[120px] w-full",
+    gradient: "bg-linear-to-b from-[#f8f8f8] to-transparent",
+  },
+  left: {
+    position: "left-0 inset-y-0",
+    size: "w-[100px] lg:w-[120px] h-full",
+    gradient: "bg-linear-to-r from-[#f8f8f8] to-transparent",
+  },
+  right: {
+    position: "right-0 inset-y-0",
+    size: "w-[100px] lg:w-[120px] h-full",
+    gradient: "bg-linear-to-l from-[#f8f8f8] to-transparent",
+  },
+} as const;
+
+const { position, size, gradient } = GRADIENT_CONFIG[gradientDirection];
+
+// =============================================================================
+// Styles
+// =============================================================================
+
+const STYLES = {
+  fontSalt: "font-feature-settings: 'salt'",
+} as const;
+---
+
+<div
+  class:list={[
+    "border border-[#eaeaea] rounded-2xl overflow-hidden flex flex-col lg:flex-row w-full bg-[#f8f8f8]",
+    desktopFlexDirection,
+  ]}
+>
+  <!-- Text Content -->
+  <div
+    class="bg-linear-to-b lg:bg-linear-to-r from-[#f7f9fa] to-[#f8f8f8] flex flex-col gap-5 justify-center px-8 pt-8 pb-0 lg:px-10 lg:py-0 lg:flex-1 lg:max-w-[480px]"
+  >
+    <h3
+      class="text-[32px] md:text-[40px] leading-[1.2] text-[#313131] font-serif"
+      style={STYLES.fontSalt}
+    >
+      {title}
+    </h3>
+    <p
+      class="text-[16px] md:text-[18px] leading-[1.4] text-[#6b6b6b]"
+      style={STYLES.fontSalt}
+    >
+      {description}
+    </p>
+  </div>
+
+  <!-- Image with Gradient Fade -->
+  <div
+    class:list={[
+      "bg-[#f8f8f8] relative flex flex-col gap-2 justify-center pt-10 px-8 pb-0 lg:p-0 lg:pt-10 lg:w-[712px] lg:shrink-0",
+      mobileAlignClass,
+    ]}
+  >
+    <!-- Image Container -->
+    <div
+      class="relative w-full max-w-full lg:w-[600px] lg:mx-auto aspect-square"
+    >
+      <Image
+        src={image}
+        alt={title}
+        class="w-full h-full object-cover"
+        loading="lazy"
+      />
+    </div>
+
+    <!-- Gradient Overlay -->
+    <div
+      class="absolute pointer-events-none"
+      class:list={[position, size, gradient]}
+    >
+    </div>
+  </div>
+</div>

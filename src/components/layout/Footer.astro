@@ -1,0 +1,327 @@
+---
+/**
+ * Footer Component
+ *
+ * Site-wide footer with:
+ * - Logo and social links
+ * - Navigation columns (Cleric, Help & Security, Use Cases)
+ * - Copyright notice
+ *
+ * Responsive layouts:
+ * - Desktop: 12-column grid with logo on left, nav columns on right
+ * - Tablet: 6-column grid, similar structure
+ * - Mobile: Stacked layout with centered social/copyright
+ */
+
+import { Image } from "astro:assets";
+
+// Import images from assets
+import logoIcon from "@/assets/logo/icon.png";
+import linkedinIcon from "@/assets/footer/linkedin.png";
+import xIcon from "@/assets/footer/x.png";
+
+// =============================================================================
+// Types
+// =============================================================================
+
+interface NavLink {
+  label: string;
+  href: string;
+}
+
+interface NavColumn {
+  title: string;
+  links: NavLink[];
+}
+
+interface SocialLink {
+  icon: ImageMetadata;
+  alt: string;
+  href: string;
+}
+
+// =============================================================================
+// Configuration
+// =============================================================================
+
+const NAV_COLUMNS: NavColumn[] = [
+  {
+    title: "Cleric",
+    links: [
+      { label: "About", href: "#" },
+      { label: "Careers", href: "#" },
+      { label: "Product", href: "#" },
+      { label: "Blog", href: "#" },
+      { label: "Webinars", href: "#" },
+    ],
+  },
+  {
+    title: "Help & Security",
+    links: [
+      { label: "Trust Center", href: "#" },
+      { label: "Terms of Use", href: "#" },
+      { label: "Privacy Policy", href: "#" },
+    ],
+  },
+  {
+    title: "Use Cases",
+    links: [
+      { label: "Alert Investigation", href: "#" },
+      { label: "Root Cause Analysis", href: "#" },
+      { label: "Fix Recommendation", href: "#" },
+      { label: "On-Call Automation", href: "#" },
+      { label: "Incident Triage", href: "#" },
+      { label: "Deployment Failures", href: "#" },
+    ],
+  },
+];
+
+const SOCIAL_LINKS: SocialLink[] = [
+  { icon: linkedinIcon, alt: "LinkedIn", href: "#" },
+  { icon: xIcon, alt: "X", href: "#" },
+];
+
+const COPYRIGHT = "© Cleric 2025";
+
+// =============================================================================
+// Styles
+// =============================================================================
+
+const STYLES = {
+  footer: "relative py-6",
+  container: "container mx-auto px-4 md:px-24 lg:px-0 lg:max-w-[1192px]",
+  columnTitle: "text-[15px] leading-[1.4] text-black font-semibold",
+  link: "text-[15px] leading-[1.4] text-black hover:opacity-85 transition-opacity",
+  socialLink: "opacity-60 hover:opacity-85 transition-opacity",
+  socialIcon: "w-5 h-5",
+  copyright: "text-[15px] leading-[1.4] text-[#939393]",
+  fontSalt: "font-feature-settings: 'salt'",
+} as const;
+---
+
+<footer class={STYLES.footer}>
+  <div class={STYLES.container}>
+    <!-- ========================================================================
+         Desktop Layout (lg+)
+         ======================================================================== -->
+    <div class="hidden lg:grid lg:grid-cols-12 lg:gap-6">
+      <!-- Logo Column -->
+      <div class="col-span-3 flex flex-col gap-6">
+        <div class="h-[167px]">
+          <a href="/">
+            <Image
+              src={logoIcon}
+              alt="Cleric"
+              class="h-8 w-auto"
+              loading="lazy"
+            />
+          </a>
+        </div>
+        <!-- Social Icons -->
+        <div class="flex gap-4 items-center">
+          {
+            SOCIAL_LINKS.map((social) => (
+              <a href={social.href} class={STYLES.socialLink}>
+                <Image
+                  src={social.icon}
+                  alt={social.alt}
+                  class={STYLES.socialIcon}
+                  loading="lazy"
+                />
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Navigation Columns -->
+      <div class="col-span-9 flex gap-6">
+        {
+          NAV_COLUMNS.map((column) => (
+            <div class="flex-1 flex flex-col gap-6">
+              <p class={STYLES.columnTitle} style={STYLES.fontSalt}>
+                {column.title}
+              </p>
+              <div class="flex flex-col gap-2">
+                {column.links.map((link) => (
+                  <a
+                    href={link.href}
+                    class={STYLES.link}
+                    style={STYLES.fontSalt}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Copyright Row -->
+      <div class="col-span-3"></div>
+      <div class="col-span-9 flex items-end">
+        <p class={STYLES.copyright} style={STYLES.fontSalt}>
+          {COPYRIGHT}
+        </p>
+      </div>
+    </div>
+
+    <!-- ========================================================================
+         Tablet Layout (md to lg)
+         ======================================================================== -->
+    <div class="hidden md:grid md:grid-cols-6 md:gap-4 lg:hidden">
+      <!-- Logo Column -->
+      <div class="col-span-1 flex flex-col gap-6">
+        <div class="flex-1">
+          <a href="/">
+            <Image
+              src={logoIcon}
+              alt="Cleric"
+              class="h-8 w-auto"
+              loading="lazy"
+            />
+          </a>
+        </div>
+        <!-- Social Icons -->
+        <div class="flex gap-4 items-center">
+          {
+            SOCIAL_LINKS.map((social) => (
+              <a href={social.href} class={STYLES.socialLink}>
+                <Image
+                  src={social.icon}
+                  alt={social.alt}
+                  class={STYLES.socialIcon}
+                  loading="lazy"
+                />
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Navigation Columns -->
+      <div class="col-span-5 flex gap-4">
+        {
+          NAV_COLUMNS.map((column) => (
+            <div class="flex-1 flex flex-col gap-6">
+              <p class={STYLES.columnTitle} style={STYLES.fontSalt}>
+                {column.title}
+              </p>
+              <div class="flex flex-col gap-2">
+                {column.links.map((link) => (
+                  <a
+                    href={link.href}
+                    class={STYLES.link}
+                    style={STYLES.fontSalt}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Copyright Row -->
+      <div class="col-span-1"></div>
+      <div class="col-span-5 flex items-end pt-4">
+        <p class={STYLES.copyright} style={STYLES.fontSalt}>
+          {COPYRIGHT}
+        </p>
+      </div>
+    </div>
+
+    <!-- ========================================================================
+         Mobile Layout (< md)
+         ======================================================================== -->
+    <div class="flex flex-col gap-10 md:hidden">
+      <!-- Logo -->
+      <div>
+        <a href="/">
+          <Image
+            src={logoIcon}
+            alt="Cleric"
+            class="h-8 w-auto"
+            loading="lazy"
+          />
+        </a>
+      </div>
+
+      <!-- Navigation - First 2 columns (Cleric & Help) -->
+      <div class="flex flex-wrap gap-4">
+        {
+          NAV_COLUMNS.slice(0, 2).map((column) => (
+            <div class="flex-1 min-w-[150px] flex flex-col gap-4">
+              <p class={STYLES.columnTitle} style={STYLES.fontSalt}>
+                {column.title}
+              </p>
+              <div class="flex flex-col gap-2">
+                {column.links.map((link) => (
+                  <a
+                    href={link.href}
+                    class={STYLES.link}
+                    style={STYLES.fontSalt}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Use Cases - Split into 2 columns -->
+      <div class="flex flex-wrap gap-4">
+        <div class="w-full">
+          <p class={`${STYLES.columnTitle} mb-4`} style={STYLES.fontSalt}>
+            {NAV_COLUMNS[2].title}
+          </p>
+        </div>
+        <!-- First half of Use Cases links -->
+        <div class="flex-1 min-w-[150px] flex flex-col gap-2">
+          {
+            NAV_COLUMNS[2].links.slice(0, 3).map((link) => (
+              <a href={link.href} class={STYLES.link} style={STYLES.fontSalt}>
+                {link.label}
+              </a>
+            ))
+          }
+        </div>
+        <!-- Second half of Use Cases links -->
+        <div class="flex-1 min-w-[150px] flex flex-col gap-2">
+          {
+            NAV_COLUMNS[2].links.slice(3).map((link) => (
+              <a href={link.href} class={STYLES.link} style={STYLES.fontSalt}>
+                {link.label}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Social Icons and Copyright - Centered -->
+      <div class="flex flex-col gap-2 items-center">
+        <div class="flex gap-4 items-center">
+          {
+            SOCIAL_LINKS.map((social) => (
+              <a href={social.href} class={STYLES.socialLink}>
+                <Image
+                  src={social.icon}
+                  alt={social.alt}
+                  class={STYLES.socialIcon}
+                  loading="lazy"
+                />
+              </a>
+            ))
+          }
+        </div>
+        <p class={STYLES.copyright} style={STYLES.fontSalt}>
+          {COPYRIGHT}
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

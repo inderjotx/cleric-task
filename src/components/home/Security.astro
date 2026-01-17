@@ -1,0 +1,110 @@
+---
+/**
+ * Security Section Component
+ *
+ * Displays the "Security-first" section with:
+ * - Badge, title, and description
+ * - Trust Center link
+ * - Shield illustration
+ *
+ * Layout:
+ * - Mobile: Stacked vertically
+ * - Tablet: 2-column grid
+ * - Desktop: Flex row
+ */
+
+import { Image } from "astro:assets";
+import { ArrowUpRight } from "lucide-react";
+
+// Import optimized image from assets
+import shieldImage from "@/assets/security/shield.png";
+
+// =============================================================================
+// Configuration
+// =============================================================================
+
+const CONTENT = {
+  badge: "Security-first",
+  title: "Paranoid by design",
+  description:
+    "Read-only by default. Every action logged, every investigation auditable. Your data encrypted everywhere and never used for training.",
+  link: {
+    prefix: "Learn more in our",
+    text: "Trust Center",
+    href: "#",
+  },
+} as const;
+
+// =============================================================================
+// Styles
+// =============================================================================
+
+const STYLES = {
+  section:
+    "relative bg-linear-to-t from-[#f8f8f8] to-[#f7f9fa] py-20 md:py-24 lg:py-30",
+  badge:
+    "bg-[#e0e0e0] flex h-8 items-center justify-center px-4 py-2.5 rounded w-fit text-[14px] leading-[1.2] tracking-[-0.035px] text-[#6b6b6b] font-medium",
+  title:
+    "text-[36px] md:text-[44px] lg:text-[48px] leading-[1.15] tracking-[-0.18px] md:tracking-[-0.22px] lg:tracking-[-0.24px] text-[#313131] font-serif",
+  description:
+    "text-[16px] md:text-[18px] lg:text-[18px] leading-[1.4] text-[#313131]",
+  linkText: "text-[15px] leading-[1.4] text-[#313131]",
+  link: "flex gap-1 items-center text-[15px] leading-[1.4] text-black underline decoration-solid",
+  fontSalt: "font-feature-settings: 'salt'",
+} as const;
+---
+
+<section class={STYLES.section}>
+  <div class="container mx-auto px-4 md:px-6 lg:px-20">
+    <div
+      class="flex flex-col md:grid md:grid-cols-2 lg:flex lg:flex-row gap-10 md:gap-8 lg:gap-10 items-center max-w-[1192px] mx-auto"
+    >
+      <!-- ======================================================================
+           Text Content
+           ====================================================================== -->
+      <div class="flex flex-col gap-6 items-start max-w-[560px] w-full">
+        <!-- Header -->
+        <header class="flex flex-col gap-6 w-full">
+          <span class={STYLES.badge} style={STYLES.fontSalt}>
+            {CONTENT.badge}
+          </span>
+          <h2 class={STYLES.title} style={STYLES.fontSalt}>
+            {CONTENT.title}
+          </h2>
+        </header>
+
+        <!-- Description -->
+        <p class={STYLES.description} style={STYLES.fontSalt}>
+          {CONTENT.description}
+        </p>
+
+        <!-- Trust Center Link -->
+        <div class="flex gap-1 items-center">
+          <span class={STYLES.linkText} style={STYLES.fontSalt}>
+            {CONTENT.link.prefix}
+          </span>
+          <a
+            href={CONTENT.link.href}
+            class={STYLES.link}
+            style={STYLES.fontSalt}
+          >
+            {CONTENT.link.text}
+            <ArrowUpRight className="size-4" />
+          </a>
+        </div>
+      </div>
+
+      <!-- ======================================================================
+           Illustration
+           ====================================================================== -->
+      <div class="flex items-center justify-center w-full flex-1">
+        <Image
+          src={shieldImage}
+          alt="Security Overview"
+          class="w-full h-auto max-w-full object-contain"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+</section>

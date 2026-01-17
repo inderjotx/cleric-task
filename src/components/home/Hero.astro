@@ -1,0 +1,246 @@
+---
+/**
+ * Hero Section Component
+ *
+ * The main hero section for the homepage featuring:
+ * - Announcement badge with press release link
+ * - Main headline and subtitle
+ * - CTA buttons (using shared Button component)
+ * - Product visuals with Astro Image optimization
+ */
+
+import { Image } from "astro:assets";
+import { ArrowUpRight } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+
+// Import optimized images from assets
+import heroBg from "@/assets/hero/hero-bg.png";
+import heroSlackMobile from "@/assets/hero/hero-slack-mobile.png";
+import heroSlack from "@/assets/hero/hero-slack.png";
+import heroWebUi from "@/assets/hero/hero-web-ui.png";
+
+// =============================================================================
+// Configuration
+// =============================================================================
+
+const CONTENT = {
+  badge: {
+    label: "Press release",
+    text: "Cleric launches the first self-learning AI SRE",
+    href: "#",
+  },
+  headline: "The AI SRE that learns from your engineers",
+  subtitle:
+    "Cleric investigates production issues, captures what works, and makes your whole team faster.",
+  buttons: [
+    {
+      text: "Try it out",
+      href: "/try-it-out",
+      variant: "heroPrimary" as const,
+    },
+    { text: "Request Demo", href: "#", variant: "heroSecondary" as const },
+  ],
+} as const;
+
+// =============================================================================
+// Styles
+// =============================================================================
+
+const STYLES = {
+  shadow: {
+    small:
+      "shadow-[0px_3.382px_3.382px_0px_rgba(39,43,49,0.08),0px_3.382px_20.295px_0px_rgba(39,43,49,0.1)]",
+    large:
+      "shadow-[0px_3.382px_64.5px_5px_rgba(39,43,49,0.1),0px_3.382px_20.295px_0px_rgba(66,72,70,0.1)]",
+    badge:
+      "shadow-[0px_3.382px_3.382px_0px_rgba(66,72,70,0.08),0px_3.382px_20.295px_0px_rgba(66,72,70,0.1)]",
+  },
+} as const;
+---
+
+<section class="relative overflow-hidden">
+  <!-- ==========================================================================
+       Background Layer
+       ========================================================================== -->
+  <div class="absolute inset-0 -z-10 w-full">
+    <Image
+      src={heroBg}
+      alt=""
+      class="w-full h-full object-cover object-top"
+      loading="eager"
+      quality={90}
+    />
+  </div>
+
+  <!-- Fade Overlay -->
+  <div
+    class="absolute inset-x-0 bottom-0 h-[120px] md:h-[200px] bg-linear-to-t from-white via-white/95 to-transparent pointer-events-none z-10"
+  >
+  </div>
+
+  <!-- ==========================================================================
+       Main Content
+       ========================================================================== -->
+  <div
+    class="flex flex-col gap-[120px] md:gap-16 items-center px-4 md:px-10 lg:px-20 pt-32 md:pt-[140px] lg:pt-32 pb-0 md:pb-6"
+  >
+    <div
+      class="flex flex-col items-center text-center gap-6 md:gap-12 w-full max-w-[1192px]"
+    >
+      <!-- ======================================================================
+           Badge
+           ====================================================================== -->
+      <a
+        href={CONTENT.badge.href}
+        class="group backdrop-blur-[2px] bg-black/10 border border-black/10 rounded-md p-2 md:p-3 flex flex-row items-center md:items-baseline justify-center gap-2 md:gap-3 w-full md:w-auto hover:bg-black/15 transition-colors"
+      >
+        <span
+          class:list={[
+            "bg-[#e1defe] opacity-80 px-3 py-1 rounded text-[12px] md:text-[14px] font-medium text-[#313131] leading-[1.2] shrink-0",
+            STYLES.shadow.badge,
+          ]}
+          style="font-feature-settings: 'salt'"
+        >
+          {CONTENT.badge.label}
+        </span>
+        <span
+          class="flex items-center gap-1.5 opacity-80 flex-1 md:flex-none min-w-0"
+        >
+          <span
+            class="text-[12px] md:text-[15px] text-white leading-[1.4] truncate md:whitespace-nowrap"
+            style="font-feature-settings: 'salt'"
+          >
+            {CONTENT.badge.text}
+          </span>
+          <ArrowUpRight
+            className="w-4 h-4 text-white shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+          />
+        </span>
+      </a>
+
+      <!-- ======================================================================
+           Headline & CTA
+           ====================================================================== -->
+      <div class="flex flex-col gap-6 md:gap-8 items-center w-full">
+        <header
+          class="flex flex-col gap-4 items-center text-center text-white w-full"
+        >
+          <h1
+            class="font-serif text-[40px] md:text-[56px] lg:text-[72px] leading-[1.15] tracking-[-0.6px] md:tracking-[-1.12px] lg:tracking-[-1.8px] capitalize w-full lg:max-w-[960px]"
+            style="font-feature-settings: 'salt'"
+          >
+            {CONTENT.headline}
+          </h1>
+          <p
+            class="text-[18px] md:text-[20px] lg:text-[24px] leading-[1.25] tracking-[0.135px] md:tracking-[0.15px] lg:tracking-[0.18px] w-full lg:max-w-[680px]"
+            style="font-feature-settings: 'salt'"
+          >
+            {CONTENT.subtitle}
+          </p>
+        </header>
+
+        <!-- CTA Buttons -->
+        <div
+          class="flex items-center justify-center gap-2 md:gap-6 lg:gap-8 w-full"
+        >
+          {
+            CONTENT.buttons.map((button) => (
+              <a
+                href={button.href}
+                class={buttonVariants({
+                  variant: button.variant,
+                  size: "hero",
+                })}
+                style="font-feature-settings: 'salt'"
+              >
+                {button.text}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         Product Visuals
+         ========================================================================== -->
+
+    <!-- Mobile: Single Slack Image -->
+    <div class="md:hidden w-full">
+      <div
+        class:list={[
+          "relative w-full rounded-t-xl overflow-hidden",
+          STYLES.shadow.large,
+        ]}
+        style="aspect-ratio: 408/645;"
+      >
+        <Image
+          src={heroSlackMobile}
+          alt="Cleric Slack Integration"
+          class="w-full h-full object-cover"
+          loading="lazy"
+        />
+      </div>
+    </div>
+
+    <!-- Tablet: Side-by-side with overlap -->
+    <div
+      class="hidden md:flex lg:hidden items-end w-full max-w-[1192px] pr-[200px] relative"
+    >
+      <div
+        class:list={["flex-1 mr-[-200px]", STYLES.shadow.small]}
+        style="aspect-ratio: 3240/1890;"
+      >
+        <Image
+          src={heroWebUi}
+          alt="Cleric Dashboard Interface"
+          class="w-full h-full object-cover"
+          loading="lazy"
+        />
+      </div>
+      <div
+        class:list={[
+          "w-[220px] h-[303px] mr-[-200px] shrink-0 rounded-t-xl overflow-hidden",
+          STYLES.shadow.large,
+        ]}
+      >
+        <Image
+          src={heroSlack}
+          alt="Cleric Slack Integration"
+          class="w-full h-full object-cover"
+          loading="lazy"
+        />
+      </div>
+    </div>
+
+    <!-- Desktop: Larger side-by-side with overlap -->
+    <div
+      class="hidden lg:flex items-end w-full max-w-[1192px] pr-[240px] relative"
+    >
+      <div
+        class:list={["flex-1 mr-[-240px]", STYLES.shadow.small]}
+        style="aspect-ratio: 3240/1890;"
+      >
+        <Image
+          src={heroWebUi}
+          alt="Cleric Dashboard Interface"
+          class="w-full h-full object-cover"
+          loading="lazy"
+        />
+      </div>
+      <div
+        class:list={[
+          "w-[320px] h-[441px] mr-[-240px] shrink-0 rounded-t-xl overflow-hidden",
+          STYLES.shadow.large,
+        ]}
+      >
+        <Image
+          src={heroSlack}
+          alt="Cleric Slack Integration"
+          class="w-full h-full object-cover"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+</section>

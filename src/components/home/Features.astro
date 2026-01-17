@@ -1,0 +1,135 @@
+---
+/**
+ * Features Section Component
+ *
+ * Displays the "Cleric in action" section with:
+ * - Section header (badge, title, subtitle)
+ * - List of feature cards with alternating layouts
+ */
+
+import type { ImageMetadata } from "astro";
+import Feature from "./Feature.astro";
+
+// Import optimized images from assets
+import feature1 from "@/assets/features/feature1.png";
+import feature2 from "@/assets/features/feature2.png";
+import feature3 from "@/assets/features/feature3.png";
+import feature4 from "@/assets/features/feature4.png";
+
+// =============================================================================
+// Types
+// =============================================================================
+
+interface FeatureItem {
+  title: string;
+  description: string;
+  image: ImageMetadata;
+  imageDirectionDesktop: "left" | "right";
+  imageDirectionMobile: "left" | "right" | "center";
+  gradientDirection: "bottom" | "left" | "right" | "top";
+}
+
+// =============================================================================
+// Configuration
+// =============================================================================
+
+const HEADER = {
+  badge: "Cleric in action",
+  title: "Things break. Cleric investigates.",
+  subtitle:
+    "While you're still reading the alert, Cleric's already three steps into the investigation.",
+} as const;
+
+const FEATURES: FeatureItem[] = [
+  {
+    title: "Skip straight to the answer",
+    description:
+      "Cleric automatically investigates alerts and delivers root cause analysis so you know exactly what's wrong and whether to act.",
+    image: feature1,
+    imageDirectionDesktop: "right",
+    imageDirectionMobile: "center",
+    gradientDirection: "bottom",
+  },
+  {
+    title: "Trust but verify",
+    description:
+      "See exactly how Cleric reached its conclusions so you can trust the diagnosis and move to resolution.",
+    image: feature2,
+    imageDirectionDesktop: "left",
+    imageDirectionMobile: "left",
+    gradientDirection: "left",
+  },
+  {
+    title: "Ship a fix",
+    description:
+      "Work with Cleric to ship fixes by asking questions, giving instructions, and collaborating until the issue is resolved.",
+    image: feature3,
+    imageDirectionDesktop: "right",
+    imageDirectionMobile: "right",
+    gradientDirection: "right",
+  },
+  {
+    title: "Learns from failure",
+    description:
+      "Engineers leave, context doesn't. Every resolution becomes institutional knowledge your whole team can use.",
+    image: feature4,
+    imageDirectionDesktop: "left",
+    imageDirectionMobile: "left",
+    gradientDirection: "left",
+  },
+];
+
+// =============================================================================
+// Styles
+// =============================================================================
+
+const STYLES = {
+  badge:
+    "bg-[#eaeaea] flex h-8 items-center justify-center px-4 py-2.5 rounded text-[14px] leading-[1.2] tracking-[-0.035px] text-[#6b6b6b] font-medium",
+  title:
+    "text-[36px] md:text-[44px] lg:text-[48px] leading-[1.15] tracking-[-0.18px] md:tracking-[-0.22px] lg:tracking-[-0.24px] text-[#313131] font-serif",
+  subtitle:
+    "text-[18px] md:text-[20px] lg:text-[24px] leading-tight tracking-[0.135px] md:tracking-[0.15px] lg:tracking-[0.18px] text-[#6b6b6b] font-normal",
+  fontSalt: "font-feature-settings: 'salt'",
+} as const;
+---
+
+<section class="relative py-16 md:py-20 lg:py-24">
+  <div class="container mx-auto px-4 md:px-6 lg:px-20">
+    <div class="flex flex-col gap-8 md:gap-12 lg:gap-16 max-w-[1600px] mx-auto">
+      <!-- ======================================================================
+           Header
+           ====================================================================== -->
+      <header class="flex flex-col gap-5 md:gap-6 items-center text-center">
+        <span class={STYLES.badge} style={STYLES.fontSalt}>
+          {HEADER.badge}
+        </span>
+
+        <div class="flex flex-col gap-2 items-center w-full">
+          <h2 class={STYLES.title} style={STYLES.fontSalt}>
+            {HEADER.title}
+          </h2>
+          <p class={STYLES.subtitle} style={STYLES.fontSalt}>
+            {HEADER.subtitle}
+          </p>
+        </div>
+      </header>
+
+      <!-- ======================================================================
+           Features List
+           ====================================================================== -->
+      {
+        FEATURES.map((feature) => (
+          <Feature
+            title={feature.title}
+            description={feature.description}
+            image={feature.image}
+            imageDirectionDesktop={feature.imageDirectionDesktop}
+            imageDirectionMobile={feature.imageDirectionMobile}
+            gradientDirection={feature.gradientDirection}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>

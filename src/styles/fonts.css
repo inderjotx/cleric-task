@@ -1,0 +1,103 @@
+@font-face {
+  font-family: "Cleric Sans";
+  src: url("/fonts/ClericSans/Cleric-Sans-Text-300.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cleric Sans";
+  src: url("/fonts/ClericSans/Cleric-Sans-Text-300Italic.woff2") format("woff2");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cleric Sans";
+  src: url("/fonts/ClericSans/Cleric-Sans-Text-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cleric Sans";
+  src: url("/fonts/ClericSans/Cleric-Sans-Text-400Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cleric Sans";
+  src: url("/fonts/ClericSans/Cleric-Sans-Text-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cleric Sans";
+  src: url("/fonts/ClericSans/Cleric-Sans-Text-500Italic.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cleric Sans";
+  src: url("/fonts/ClericSans/Cleric-Sans-Text-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cleric Sans";
+  src: url("/fonts/ClericSans/Cleric-Sans-Text-600Italic.woff2") format("woff2");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* GT America Mono */
+@font-face {
+  font-family: "GT America Mono";
+  src: url("/fonts/GT America/GT-America-Mono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* GT Alpina Standard */
+@font-face {
+  font-family: "GT Alpina Standard";
+  src: url("/fonts/GT Alpina/GT-Alpina-Standard-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT Alpina Standard";
+  src: url("/fonts/GT Alpina/GT-Alpina-Standard-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT Alpina Standard";
+  src: url("/fonts/GT Alpina/GT-Alpina-Standard-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: "Cleric Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-serif: "GT Alpina Standard", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: "GT America Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}

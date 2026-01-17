@@ -1,0 +1,148 @@
+---
+/**
+ * Stack/Integrations Section Component
+ *
+ * Displays the "Integrations" section with:
+ * - Section header (badge, title, subtitle)
+ * - Grid of integration logos
+ * - CTA link
+ *
+ * Responsive sizing:
+ * - Desktop: 80x80px icons, 80px horizontal gap
+ * - Tablet/Mobile: 64x64px icons, 16px gap
+ */
+
+import { Image } from "astro:assets";
+import { ArrowUpRight } from "lucide-react";
+
+// Import logos from assets
+import kubernetesLogo from "@/assets/stack/logos/kubernetes.svg";
+import slackLogo from "@/assets/stack/logos/Slack.svg";
+import awsLogo from "@/assets/stack/logos/aws.svg";
+import pulumiLogo from "@/assets/stack/logos/pulumi.png";
+import elasticsearchLogo from "@/assets/stack/logos/elasticsearch.svg";
+import githubLogo from "@/assets/stack/logos/github.svg";
+import gitlabLogo from "@/assets/stack/logos/gitlab.svg";
+import prometheusLogo from "@/assets/stack/logos/prometheus.png";
+import azureLogo from "@/assets/stack/logos/azure.svg";
+import confluenceLogo from "@/assets/stack/logos/confluence.png";
+import datadogLogo from "@/assets/stack/logos/Datadog.svg";
+import gcpLogo from "@/assets/stack/logos/gcp.svg";
+import lokiLogo from "@/assets/stack/logos/loki.svg";
+import splunkLogo from "@/assets/stack/logos/splunk.svg";
+import teamsLogo from "@/assets/stack/logos/teams.svg";
+
+// =============================================================================
+// Configuration
+// =============================================================================
+
+const HEADER = {
+  badge: "Integrations",
+  title: "Built to plug right into your stack",
+  subtitle:
+    "Connect your whole stack in an afternoon. Read access by default, write access when you're ready.",
+} as const;
+
+const INTEGRATIONS = [
+  { logo: kubernetesLogo, alt: "Kubernetes" },
+  { logo: slackLogo, alt: "Slack" },
+  { logo: awsLogo, alt: "AWS" },
+  { logo: pulumiLogo, alt: "Pulumi" },
+  { logo: elasticsearchLogo, alt: "Elasticsearch" },
+  { logo: teamsLogo, alt: "Microsoft Teams" },
+  { logo: splunkLogo, alt: "Splunk" },
+  { logo: githubLogo, alt: "GitHub" },
+  { logo: gitlabLogo, alt: "GitLab" },
+  { logo: datadogLogo, alt: "Datadog" },
+  { logo: prometheusLogo, alt: "Prometheus" },
+  { logo: azureLogo, alt: "Azure" },
+  { logo: confluenceLogo, alt: "Confluence" },
+  { logo: lokiLogo, alt: "Loki" },
+  { logo: gcpLogo, alt: "Google Cloud" },
+] as const;
+
+const CTA = {
+  prefix: "See if Cleric is a fit",
+  linkText: "for your stack",
+  href: "#",
+} as const;
+
+// =============================================================================
+// Styles
+// =============================================================================
+
+const STYLES = {
+  section: "relative py-20 md:py-[120px] lg:py-40",
+  badge:
+    "bg-[#eaeaea] flex h-8 items-center justify-center px-4 py-2.5 rounded text-[14px] leading-[1.2] tracking-[-0.035px] text-[#6b6b6b] font-medium text-center",
+  title:
+    "text-[36px] md:text-[44px] lg:text-[48px] leading-[1.15] tracking-[-0.18px] md:tracking-[-0.22px] lg:tracking-[-0.24px] text-[#313131] font-serif text-center",
+  subtitle:
+    "text-[18px] md:text-[20px] lg:text-[24px] leading-[1.25] tracking-[0.135px] md:tracking-[0.15px] lg:tracking-[0.18px] text-[#6b6b6b] font-normal text-center",
+  logoBox:
+    "bg-[#f7f9fa] rounded-2xl flex items-center justify-center size-16 lg:size-20 p-2 lg:p-4",
+  linkText: "text-[15px] leading-[1.4] text-[#313131]",
+  link: "flex gap-1 items-center text-[15px] leading-[1.4] text-black underline decoration-solid",
+  fontSalt: "font-feature-settings: 'salt'",
+} as const;
+---
+
+<section class={STYLES.section}>
+  <div class="container mx-auto px-4 md:px-24 lg:px-20">
+    <div
+      class="flex flex-col gap-10 md:gap-12 lg:gap-16 items-center max-w-[1200px] mx-auto"
+    >
+      <!-- ======================================================================
+           Header
+           ====================================================================== -->
+      <header class="flex flex-col gap-4 md:gap-5 lg:gap-6 items-center w-full">
+        <span class={STYLES.badge} style={STYLES.fontSalt}>
+          {HEADER.badge}
+        </span>
+
+        <div class="flex flex-col gap-2 items-center w-full">
+          <h2 class={STYLES.title} style={STYLES.fontSalt}>
+            {HEADER.title}
+          </h2>
+          <p class={STYLES.subtitle} style={STYLES.fontSalt}>
+            {HEADER.subtitle}
+          </p>
+        </div>
+      </header>
+
+      <!-- ======================================================================
+           Integrations Grid
+           ====================================================================== -->
+      <div class="flex flex-col gap-6 md:gap-10 lg:gap-10 items-center w-full">
+        <!-- Logo Grid -->
+        <div
+          class="flex flex-wrap gap-4 lg:gap-x-20 lg:gap-y-4 justify-center items-start w-full max-w-[1200px]"
+        >
+          {
+            INTEGRATIONS.map((integration) => (
+              <div class={STYLES.logoBox}>
+                <Image
+                  src={integration.logo}
+                  alt={integration.alt}
+                  class="w-8 h-8 object-contain"
+                  loading="lazy"
+                />
+              </div>
+            ))
+          }
+        </div>
+
+        <!-- CTA Link -->
+        <div class="flex gap-1 items-center justify-center">
+          <span class={STYLES.linkText} style={STYLES.fontSalt}>
+            {CTA.prefix}
+          </span>
+          <a href={CTA.href} class={STYLES.link} style={STYLES.fontSalt}>
+            {CTA.linkText}
+            <ArrowUpRight className="size-4" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

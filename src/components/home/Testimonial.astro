@@ -1,0 +1,173 @@
+---
+/**
+ * Testimonial Section Component
+ *
+ * Displays a featured customer testimonial with:
+ * - Customer quote
+ * - Author info with avatar
+ * - Company logo
+ * - CTA link to case study
+ *
+ * Responsive layouts:
+ * - Mobile/Tablet: Stacked vertical layout
+ * - Desktop: Side-by-side with large author image
+ */
+
+import { Image } from "astro:assets";
+import { buttonVariants } from "@/components/ui/button";
+
+// Import optimized images from assets
+import authorAvatar from "@/assets/testimonials/maxime.png";
+import companyLogo from "@/assets/testimonials/blablacar-logo.svg";
+
+// =============================================================================
+// Configuration
+// =============================================================================
+
+const TESTIMONIAL = {
+  quote:
+    "I see Cleric functioning as an SRE companion for our Software Engineers. If one team has already solved an alert, we can apply that knowledge elsewhere.",
+  author: {
+    name: "Maxime Fouilleul",
+    title: "Head of Infrastructure & Operations",
+    company: "BlaBlaCar",
+  },
+  cta: {
+    text: "Read case study",
+    href: "#",
+  },
+} as const;
+
+// =============================================================================
+// Styles
+// =============================================================================
+
+const STYLES = {
+  card: "bg-linear-to-t from-[#f8f8f8] to-[#f7f9fa] border border-[#eaeaea] rounded-2xl overflow-hidden max-w-[1192px] mx-auto",
+  quote: "text-[#313131] font-normal leading-[1.4]",
+  authorName: "font-semibold text-[18px] leading-[1.4] text-[#313131]",
+  authorTitle: "font-normal text-[18px] leading-[1.4] text-[#313131]",
+  fontSalt: "font-feature-settings: 'salt'",
+} as const;
+---
+
+<section class="relative py-10 pb-40 lg:pt-10 lg:pb-40">
+  <div class="container mx-auto px-4 md:px-24 lg:px-20">
+    <div class={STYLES.card}>
+      <!-- ======================================================================
+           Mobile & Tablet Layout
+           ====================================================================== -->
+      <div class="lg:hidden flex flex-col gap-10 p-8">
+        <!-- Company Logo -->
+        <Image
+          src={companyLogo}
+          alt={TESTIMONIAL.author.company}
+          class="w-[132px] h-6 object-contain"
+        />
+
+        <!-- Quote -->
+        <blockquote
+          class:list={[STYLES.quote, "text-[28px] tracking-[-0.07px]"]}
+          style={STYLES.fontSalt}
+        >
+          "{TESTIMONIAL.quote}"
+        </blockquote>
+
+        <!-- Author & CTA -->
+        <!-- Mobile: stacked (button on new line, left) | Tablet: row (button on right) -->
+        <div class="flex flex-col md:flex-row md:items-center gap-6">
+          <!-- Author Info -->
+          <div class="flex gap-3 items-center md:flex-1">
+            <div
+              class="w-[72px] h-[72px] rounded-full overflow-hidden shrink-0 relative"
+            >
+              <Image
+                src={authorAvatar}
+                alt={TESTIMONIAL.author.name}
+                class="absolute w-[163%] h-[163%] -left-[31%] -top-[30%] max-w-none object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div class="flex flex-col">
+              <p class={STYLES.authorName} style={STYLES.fontSalt}>
+                {TESTIMONIAL.author.name}
+              </p>
+              <p class={STYLES.authorTitle} style={STYLES.fontSalt}>
+                {TESTIMONIAL.author.title} | {TESTIMONIAL.author.company}
+              </p>
+            </div>
+          </div>
+
+          <!-- CTA Button -->
+          <!-- Mobile: left aligned | Tablet: right aligned (shrink-0) -->
+          <a
+            href={TESTIMONIAL.cta.href}
+            class:list={[
+              buttonVariants({ variant: "default", size: "default" }),
+              "self-start md:self-auto md:shrink-0",
+            ]}
+            style={STYLES.fontSalt}
+          >
+            {TESTIMONIAL.cta.text}
+          </a>
+        </div>
+      </div>
+
+      <!-- ======================================================================
+           Desktop Layout
+           ====================================================================== -->
+      <div class="hidden lg:flex flex-row gap-10 items-center">
+        <!-- Author Image (Large) -->
+        <div class="shrink-0 w-[382px] h-[366px] relative overflow-hidden">
+          <Image
+            src={authorAvatar}
+            alt={TESTIMONIAL.author.name}
+            class="absolute w-[145%] h-[151%] -left-[26%] -top-[21%] max-w-none object-cover"
+            loading="lazy"
+          />
+        </div>
+
+        <!-- Content -->
+        <div class="flex-1 flex flex-col gap-10 py-8 pr-8">
+          <!-- Quote -->
+          <blockquote
+            class:list={[STYLES.quote, "text-[30px] tracking-[-0.075px]"]}
+            style={STYLES.fontSalt}
+          >
+            "{TESTIMONIAL.quote}"
+          </blockquote>
+
+          <!-- Footer -->
+          <div class="flex flex-col gap-6">
+            <!-- Company Logo -->
+            <Image
+              src={companyLogo}
+              alt={TESTIMONIAL.author.company}
+              class="w-[132px] h-6 object-contain"
+            />
+
+            <!-- Author & CTA -->
+            <div class="flex gap-6 items-center">
+              <div class="flex-1 flex flex-col">
+                <p class={STYLES.authorName} style={STYLES.fontSalt}>
+                  {TESTIMONIAL.author.name}
+                </p>
+                <p class={STYLES.authorTitle} style={STYLES.fontSalt}>
+                  {TESTIMONIAL.author.title} | {TESTIMONIAL.author.company}
+                </p>
+              </div>
+
+              <a
+                href={TESTIMONIAL.cta.href}
+                class={buttonVariants({ variant: "default", size: "default" })}
+                style={STYLES.fontSalt}
+              >
+                {TESTIMONIAL.cta.text}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

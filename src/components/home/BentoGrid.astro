@@ -1,0 +1,218 @@
+---
+/**
+ * BentoGrid Section Component
+ *
+ * Displays the "Under the hood" section with:
+ * - Section header (badge, title, subtitle)
+ * - Bento-style grid layout with 3 cards
+ * - CTA button
+ *
+ * Layout:
+ * - Desktop: 2 cards on row 1, 1 full-width card on row 2
+ * - Mobile/Tablet: All cards stacked vertically
+ */
+
+import { Image } from "astro:assets";
+import { buttonVariants } from "@/components/ui/button";
+
+// Import optimized images from assets
+import grid1Image from "@/assets/bentogrid/grid1.png";
+import grid2Image from "@/assets/bentogrid/grid2.png";
+import grid3Image from "@/assets/bentogrid/grid3.png";
+
+// =============================================================================
+// Configuration
+// =============================================================================
+
+const HEADER = {
+  badge: "Under the hood",
+  title: "Simple on the surface. Serious underneath.",
+  subtitle:
+    "Three purpose-built systems that turn alerts into answers—and make every investigation faster than the last.",
+} as const;
+
+const CARDS = {
+  card1: {
+    title: "Maps your world",
+    description:
+      "Services, dependencies, and ownership mapped automatically. When something breaks, Cleric knows where to look.",
+    image: grid1Image,
+  },
+  card2: {
+    title: "Tests every theory",
+    description:
+      "Correlates signals, tests hypotheses in parallel, tracks confidence. Systematic elimination, not guesswork.",
+    image: grid2Image,
+    hasGradientOverlay: true,
+  },
+  card3: {
+    title: "Compounds over time",
+    description:
+      "Every fix teaches Cleric something new. Patterns and context accumulate automatically.",
+    image: grid3Image,
+  },
+} as const;
+
+const CTA = {
+  text: "Explore Full Platform",
+  href: "#",
+} as const;
+
+// =============================================================================
+// Styles
+// =============================================================================
+
+const STYLES = {
+  // Section
+  section: "relative py-16 md:py-20 lg:py-24",
+
+  // Header
+  badge:
+    "bg-[#eaeaea] flex h-8 items-center justify-center px-4 py-2.5 rounded text-[14px] leading-[1.2] tracking-[-0.035px] text-[#6b6b6b] font-medium",
+  title:
+    "text-[36px] md:text-[44px] lg:text-[48px] leading-[1.15] tracking-[-0.18px] md:tracking-[-0.22px] lg:tracking-[-0.24px] text-[#313131] font-serif",
+  subtitle:
+    "text-[18px] md:text-[20px] lg:text-[24px] leading-tight tracking-[0.135px] md:tracking-[0.15px] lg:tracking-[0.18px] text-[#6b6b6b] font-normal",
+
+  // Card
+  card: "bg-[#f7f9fa] border border-[#eaeaea] rounded-2xl overflow-hidden",
+  cardTitle:
+    "text-[28px] md:text-[32px] leading-[1.2] text-[#313131] font-serif",
+  cardDescription: "text-[16px] md:text-[18px] leading-[1.4] text-[#313131]",
+
+  // Gradients
+  gradientLeft:
+    "absolute left-0 top-0 bottom-0 w-[52px] bg-linear-to-r from-[#f7f9fa] to-transparent pointer-events-none",
+  gradientRight:
+    "absolute right-0 top-0 bottom-0 w-[52px] bg-linear-to-l from-[#f7f9fa] to-transparent pointer-events-none",
+  gradientBottom:
+    "absolute bottom-0 left-0 right-0 h-[51px] bg-linear-to-t from-[#f7f9fa] to-transparent pointer-events-none",
+
+  fontSalt: "font-feature-settings: 'salt'",
+} as const;
+---
+
+<section class={STYLES.section}>
+  <div class="container mx-auto px-4 md:px-6 lg:px-20">
+    <div
+      class="flex flex-col gap-10 md:gap-12 lg:gap-16 items-center max-w-[1600px] mx-auto"
+    >
+      <!-- ======================================================================
+           Header
+           ====================================================================== -->
+      <header
+        class="flex flex-col gap-5 md:gap-6 items-center md:items-start lg:items-center text-center md:text-left lg:text-center w-full max-w-[960px]"
+      >
+        <span class={STYLES.badge} style={STYLES.fontSalt}>
+          {HEADER.badge}
+        </span>
+
+        <div
+          class="flex flex-col gap-2 items-center md:items-start lg:items-center w-full"
+        >
+          <h2 class={STYLES.title} style={STYLES.fontSalt}>
+            {HEADER.title}
+          </h2>
+          <p class={STYLES.subtitle} style={STYLES.fontSalt}>
+            {HEADER.subtitle}
+          </p>
+        </div>
+      </header>
+
+      <!-- ======================================================================
+           Bento Grid
+           ====================================================================== -->
+      <div class="flex flex-col gap-10 items-center w-full">
+        <div class="flex flex-col gap-6 w-full">
+          <!-- Row 1: Two equal cards (desktop) / Stacked (mobile) -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
+            <!-- Card 1: Maps your world -->
+            <article
+              class:list={[
+                STYLES.card,
+                "flex flex-col gap-6 p-8 md:p-12 lg:pt-12 lg:px-12 lg:pb-4",
+              ]}
+            >
+              <div class="flex flex-col gap-4">
+                <h3 class={STYLES.cardTitle} style={STYLES.fontSalt}>
+                  {CARDS.card1.title}
+                </h3>
+                <p class={STYLES.cardDescription} style={STYLES.fontSalt}>
+                  {CARDS.card1.description}
+                </p>
+              </div>
+              <div class="w-full">
+                <Image
+                  src={CARDS.card1.image}
+                  alt={CARDS.card1.title}
+                  class="w-full h-auto object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </article>
+
+            <!-- Card 2: Tests every theory (with gradient overlays) -->
+            <article
+              class:list={[
+                STYLES.card,
+                "flex flex-col gap-6 p-8 md:p-12 lg:pt-12 lg:px-12 lg:pb-4 relative",
+              ]}
+            >
+              <div class="flex flex-col gap-4">
+                <h3 class={STYLES.cardTitle} style={STYLES.fontSalt}>
+                  {CARDS.card2.title}
+                </h3>
+                <p class={STYLES.cardDescription} style={STYLES.fontSalt}>
+                  {CARDS.card2.description}
+                </p>
+              </div>
+              <div class="w-full relative">
+                <Image
+                  src={CARDS.card2.image}
+                  alt={CARDS.card2.title}
+                  class="w-full h-auto object-cover"
+                  loading="lazy"
+                />
+                <!-- Gradient Overlays -->
+                <div class={STYLES.gradientLeft}></div>
+                <div class={STYLES.gradientRight}></div>
+                <div class={STYLES.gradientBottom}></div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Row 2: Full-width card -->
+          <article class:list={[STYLES.card, "flex flex-col gap-6 md:gap-9"]}>
+            <div
+              class="flex flex-col gap-4 p-8 md:p-12 lg:pt-12 lg:px-12 lg:pb-0 max-w-[560px]"
+            >
+              <h3 class={STYLES.cardTitle} style={STYLES.fontSalt}>
+                {CARDS.card3.title}
+              </h3>
+              <p class={STYLES.cardDescription} style={STYLES.fontSalt}>
+                {CARDS.card3.description}
+              </p>
+            </div>
+            <div class="w-full overflow-hidden">
+              <Image
+                src={CARDS.card3.image}
+                alt={CARDS.card3.title}
+                class="w-full h-auto object-cover"
+                loading="lazy"
+              />
+            </div>
+          </article>
+        </div>
+
+        <!-- CTA Button -->
+        <a
+          href={CTA.href}
+          class={buttonVariants({ variant: "default", size: "default" })}
+          style={STYLES.fontSalt}
+        >
+          {CTA.text}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

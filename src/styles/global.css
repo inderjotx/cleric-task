@@ -4,13 +4,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Custom responsive variants */
-/* Mobile: max-width 767px */
-@custom-variant mobile (@media (max-width: 767px));
-/* Tablet: 768px to 991px */
-@custom-variant tablet (@media (min-width: 768px) and (max-width: 991px));
-/* Desktop: min-width 992px */
-@custom-variant desktop (@media (min-width: 992px));
 
 @theme inline {
   /* Custom breakpoints */

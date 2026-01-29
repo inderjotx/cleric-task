@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { X, ChevronDown, Menu } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { useScrollDetection } from "@/components/hooks/scroll-detection";
 
 // =============================================================================
@@ -38,8 +39,6 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Careers", href: "/careers", hasDropdown: false },
 ];
 
-
-
 interface BannerProps {
   config: BannerConfig;
   onClose: () => void;
@@ -51,22 +50,25 @@ function Banner({ config, onClose }: BannerProps) {
       <div className="w-10 shrink-0" />
 
       <div className="flex-1 text-sm flex items-center justify-center min-w-0">
-        <span className="truncate">
-          {config.text}
-          <a href={config.linkHref} className="underline text-violet-400 whitespace-nowrap">
+        <span className="truncate space-x-2">
+          <span>{config.text}</span>
+          <a
+            href={config.linkHref}
+            className="underline text-violet-400 whitespace-nowrap"
+          >
             {" "}
             {config.linkText}
           </a>
         </span>
       </div>
 
-      <button
+      <Button
         onClick={onClose}
         className="shrink-0 ml-2 p-2 hover:opacity-70 transition-opacity"
         aria-label="Close banner"
       >
-        <X className="w-4 h-4" />
-      </button>
+        <X className="w-4 h-4 text-gray-400" />
+      </Button>
     </div>
   );
 }
@@ -77,7 +79,8 @@ interface NavLinkProps {
 }
 
 function NavLink({ item, isScrolled }: NavLinkProps) {
-  const baseStyles = "flex items-center gap-2 text-[15px] font-medium leading-[1.4] hover:opacity-80 transition-opacity";
+  const baseStyles =
+    "flex items-center gap-2 text-[15px] font-medium leading-[1.4] hover:opacity-80 transition-opacity";
   const colorStyles = isScrolled ? "text-[#313131]" : "text-white";
 
   return (
@@ -97,7 +100,8 @@ interface RequestDemoButtonProps {
 }
 
 function RequestDemoButton({ isScrolled }: RequestDemoButtonProps) {
-  const baseStyles = "px-4 py-1.5 rounded-full text-[15px] font-medium leading-[1.4] transition-colors";
+  const baseStyles =
+    "px-4 py-1.5 rounded-full text-[15px] font-medium leading-[1.4] transition-colors";
   const variantStyles = isScrolled
     ? "bg-black text-white hover:bg-black/90"
     : "bg-white/20 backdrop-blur-sm text-white hover:bg-white/30";
@@ -123,7 +127,7 @@ function MobileMenuButton({ isScrolled, onClick }: MobileMenuButtonProps) {
   return (
     <button
       onClick={onClick}
-      className="lg:hidden p-2 -mr-4"
+      className="md:hidden p-2 -mr-4"
       aria-label="Toggle menu"
     >
       <Menu className={`w-6 h-6 ${iconColor}`} />
@@ -156,7 +160,7 @@ export function Header() {
 
       {/* Navigation Bar */}
       <nav className={`w-full transition-colors duration-300 ${navbarStyles}`}>
-        <div className="max-w-[1600px] mx-auto  px-4 md:px-6 lg:px-20 py-2 md:py-4 flex justify-between items-center">
+        <div className="max-w-[1600px] mx-auto  px-6 md:px-6 lg:px-20 py-1.5 md:py-4 flex justify-between items-center">
           {/* Logo */}
           <a href="/" className="flex items-center">
             <img
@@ -167,7 +171,7 @@ export function Header() {
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-8">
             {NAV_ITEMS.map((item) => (
               <NavLink key={item.label} item={item} isScrolled={isScrolled} />
             ))}

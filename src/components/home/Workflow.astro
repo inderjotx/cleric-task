@@ -38,13 +38,14 @@ const STYLES = {
   title:
     "text-[36px] md:text-[44px] lg:text-[48px] leading-[1.15] tracking-[-0.18px] md:tracking-[-0.22px] lg:tracking-[-0.24px] text-[#313131] font-serif text-center w-full",
   subtitle:
-    "text-[18px] md:text-[20px] lg:text-[24px] leading-tight tracking-[0.135px] md:tracking-[0.15px] lg:tracking-[0.18px] text-[#6b6b6b] font-normal text-center w-full",
-  fontSalt: "font-feature-settings: 'salt'",
+    "text-[18px] md:text-[20px] lg:text-[24px] leading-tight tracking-[0.135px] md:tracking-[0.15px] lg:tracking-[0.18px] text-[#6b6b6b] font-normal text-center max-w-md  md:max-w-2xl lg:w-full ",
 } as const;
 ---
 
 <section class={STYLES.section}>
-  <div class="container mx-auto px-4 md:px-10 lg:px-20">
+  <div
+    class="w-full md:max-w-5xl lg:max-w-7xl mx-auto px-4 md:px-10 lg:px-20 py-16 md:py-20"
+  >
     <div
       class="flex flex-col gap-10 md:gap-12 lg:gap-16 items-center max-w-[1600px] mx-auto"
     >
@@ -52,19 +53,19 @@ const STYLES = {
            Header
            ====================================================================== -->
       <header
-        class="flex flex-col gap-4 md:gap-5 lg:gap-6 items-center max-w-[960px] w-full"
+        class="flex flex-col gap-4 lg:gap-6 items-center max-w-[960px] w-full"
       >
         <!-- Badge -->
-        <span class={STYLES.badge} style={STYLES.fontSalt}>
+        <span class={STYLES.badge}>
           {CONTENT.badge}
         </span>
 
         <!-- Title & Subtitle -->
         <div class="flex flex-col gap-2 items-center w-full">
-          <h2 class={STYLES.title} style={STYLES.fontSalt}>
+          <h2 class={STYLES.title}>
             {CONTENT.title}
           </h2>
-          <p class={STYLES.subtitle} style={STYLES.fontSalt}>
+          <p class={STYLES.subtitle}>
             {CONTENT.subtitle}
           </p>
         </div>

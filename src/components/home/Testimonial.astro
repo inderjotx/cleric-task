@@ -47,12 +47,11 @@ const STYLES = {
   quote: "text-[#313131] font-normal leading-[1.4]",
   authorName: "font-semibold text-[18px] leading-[1.4] text-[#313131]",
   authorTitle: "font-normal text-[18px] leading-[1.4] text-[#313131]",
-  fontSalt: "font-feature-settings: 'salt'",
 } as const;
 ---
 
 <section class="relative py-10 pb-40 lg:pt-10 lg:pb-40">
-  <div class="container mx-auto px-4 md:px-24 lg:px-20">
+  <div class="w-full md:max-w-5xl lg:max-w-7xl mx-auto px-4 md:px-24 lg:px-20">
     <div class={STYLES.card}>
       <!-- ======================================================================
            Mobile & Tablet Layout
@@ -68,9 +67,10 @@ const STYLES = {
         <!-- Quote -->
         <blockquote
           class:list={[STYLES.quote, "text-[28px] tracking-[-0.07px]"]}
-          style={STYLES.fontSalt}
         >
-          "{TESTIMONIAL.quote}"
+          “
+          {TESTIMONIAL.quote}
+          ”
         </blockquote>
 
         <!-- Author & CTA -->
@@ -89,10 +89,10 @@ const STYLES = {
               />
             </div>
             <div class="flex flex-col">
-              <p class={STYLES.authorName} style={STYLES.fontSalt}>
+              <p class={STYLES.authorName}>
                 {TESTIMONIAL.author.name}
               </p>
-              <p class={STYLES.authorTitle} style={STYLES.fontSalt}>
+              <p class={STYLES.authorTitle}>
                 {TESTIMONIAL.author.title} | {TESTIMONIAL.author.company}
               </p>
             </div>
@@ -106,7 +106,6 @@ const STYLES = {
               buttonVariants({ variant: "default", size: "default" }),
               "self-start md:self-auto md:shrink-0",
             ]}
-            style={STYLES.fontSalt}
           >
             {TESTIMONIAL.cta.text}
           </a>
@@ -132,9 +131,10 @@ const STYLES = {
           <!-- Quote -->
           <blockquote
             class:list={[STYLES.quote, "text-[30px] tracking-[-0.075px]"]}
-            style={STYLES.fontSalt}
           >
-            "{TESTIMONIAL.quote}"
+            “
+            {TESTIMONIAL.quote}
+            ”
           </blockquote>
 
           <!-- Footer -->
@@ -149,10 +149,10 @@ const STYLES = {
             <!-- Author & CTA -->
             <div class="flex gap-6 items-center">
               <div class="flex-1 flex flex-col">
-                <p class={STYLES.authorName} style={STYLES.fontSalt}>
+                <p class={STYLES.authorName}>
                   {TESTIMONIAL.author.name}
                 </p>
-                <p class={STYLES.authorTitle} style={STYLES.fontSalt}>
+                <p class={STYLES.authorTitle}>
                   {TESTIMONIAL.author.title} | {TESTIMONIAL.author.company}
                 </p>
               </div>
@@ -160,7 +160,6 @@ const STYLES = {
               <a
                 href={TESTIMONIAL.cta.href}
                 class={buttonVariants({ variant: "default", size: "default" })}
-                style={STYLES.fontSalt}
               >
                 {TESTIMONIAL.cta.text}
               </a>

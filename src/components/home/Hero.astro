@@ -15,6 +15,7 @@ import { buttonVariants } from "@/components/ui/button";
 
 // Import optimized images from assets
 import heroBg from "@/assets/hero/hero-bg.png";
+import heroBgMobile from "@/assets/hero/hero-bg-mobile.png";
 import heroSlackMobile from "@/assets/hero/hero-slack-mobile.png";
 import heroSlack from "@/assets/hero/hero-slack.png";
 import heroWebUi from "@/assets/hero/hero-web-ui.png";
@@ -63,18 +64,27 @@ const STYLES = {
        Background Layer
        ========================================================================== -->
   <div class="absolute inset-0 -z-10 w-full">
+    <!-- Mobile Background -->
+    <Image
+      src={heroBgMobile}
+      alt=""
+      class="md:hidden w-full h-full object-cover object-top"
+      loading="eager"
+      quality={100}
+    />
+    <!-- Desktop/Tablet Background -->
     <Image
       src={heroBg}
       alt=""
-      class="w-full h-full object-cover object-top"
+      class="hidden md:block w-full h-full object-cover object-top"
       loading="eager"
-      quality={90}
+      quality={100}
     />
   </div>
 
   <!-- Fade Overlay -->
   <div
-    class="absolute inset-x-0 bottom-0 h-[120px] md:h-[200px] bg-linear-to-t from-white via-white/95 to-transparent pointer-events-none z-10"
+    class="absolute inset-x-0 bottom-0 h-[120px] md:h-[160px] bg-linear-to-t from-white via-white/95 to-transparent pointer-events-none z-10"
   >
   </div>
 
@@ -82,38 +92,36 @@ const STYLES = {
        Main Content
        ========================================================================== -->
   <div
-    class="flex flex-col gap-[120px] md:gap-16 items-center px-4 md:px-10 lg:px-20 pt-32 md:pt-[140px] lg:pt-32 pb-0 md:pb-6"
+    class="flex flex-col gap-12 md:gap-16 items-center px-4 md:px-10 lg:px-20 pt-28 md:pt-[100px] lg:pt-32 pb-0 md:pb-6"
   >
     <div
-      class="flex flex-col items-center md:my-16 text-center gap-6 md:gap-12 w-full max-w-[1192px]"
+      class="flex flex-col items-center md:mb-6 md:mt-12 lg:my-16 text-center gap-6 md:gap-12 w-full max-w-[1192px]"
     >
       <!-- ======================================================================
            Badge
            ====================================================================== -->
       <a
+        class="group backdrop-blur-[2px] bg-black/10 border border-black/10 rounded-md p-2 md:p-3 flex flex-row items-center md:items-baseline justify-center gap-3 md:w-auto hover:bg-black/15 transition-colors"
         href={CONTENT.badge.href}
-        class="group backdrop-blur-[2px] bg-black/10 border border-black/10 rounded-md p-2 md:p-3 flex flex-row items-center md:items-baseline justify-center gap-2 md:gap-3 w-full md:w-auto hover:bg-black/15 transition-colors"
       >
         <span
           class:list={[
             "bg-[#e1defe] opacity-80 px-3 py-1 rounded text-[12px] md:text-[14px] font-medium text-[#313131] leading-[1.2] shrink-0",
             STYLES.shadow.badge,
           ]}
-          style="font-feature-settings: 'salt'"
         >
           {CONTENT.badge.label}
         </span>
         <span
-          class="flex items-center gap-1.5 opacity-80 flex-1 md:flex-none min-w-0"
+          class="flex items-center gap-2 opacity-80 flex-1 md:flex-none min-w-0"
         >
           <span
             class="text-[12px] md:text-[15px] text-white leading-[1.4] truncate md:whitespace-nowrap"
-            style="font-feature-settings: 'salt'"
           >
             {CONTENT.badge.text}
           </span>
           <ArrowUpRight
-            className="w-4 h-4 text-white shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+            className="w-4 h-4 text-white shrink-0 translate-x-0 translate-y-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
           />
         </span>
       </a>
@@ -126,14 +134,12 @@ const STYLES = {
           class="flex flex-col gap-4 items-center text-center text-white w-full"
         >
           <h1
-            class="font-serif text-[40px] md:text-[56px] lg:text-[72px] leading-[1.15] tracking-[-0.6px] md:tracking-[-1.12px] lg:tracking-[-1.8px] capitalize w-full lg:max-w-[960px]"
-            style="font-feature-settings: 'salt'"
+            class="font-serif text-balance text-[46px] md:text-[56px] lg:text-[72px] leading-[1.15] tracking-[-0.6px] md:tracking-[-1.12px] lg:tracking-[-1.8px] capitalize w-full lg:max-w-[960px]"
           >
             {CONTENT.headline}
           </h1>
           <p
-            class="text-[18px] md:text-[20px] lg:text-[24px] leading-[1.25] tracking-[0.135px] md:tracking-[0.15px] lg:tracking-[0.18px] w-full lg:max-w-[680px]"
-            style="font-feature-settings: 'salt'"
+            class="text-[18px] md:text-[20px] lg:text-[24px] tracking-[0.135px] md:tracking-[0.15px] lg:tracking-[0.18px] w-full max-w-[460px] md:max-w-[580px] lg:max-w-[680px]"
           >
             {CONTENT.subtitle}
           </p>
@@ -151,7 +157,6 @@ const STYLES = {
                   variant: button.variant,
                   size: "hero",
                 })}
-                style="font-feature-settings: 'salt'"
               >
                 {button.text}
               </a>
@@ -167,13 +172,7 @@ const STYLES = {
 
     <!-- Mobile: Single Slack Image -->
     <div class="md:hidden w-full">
-      <div
-        class:list={[
-          "relative w-full rounded-t-xl overflow-hidden",
-          STYLES.shadow.large,
-        ]}
-        style="aspect-ratio: 408/645;"
-      >
+      <div class:list={["relative w-full rounded-t-xl overflow-hidden "]}>
         <Image
           src={heroSlackMobile}
           alt="Cleric Slack Integration"

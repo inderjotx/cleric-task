@@ -87,29 +87,28 @@ const STYLES = {
   badge:
     "bg-[#eaeaea] flex h-8 items-center justify-center px-4 py-2.5 rounded text-[14px] leading-[1.2] tracking-[-0.035px] text-[#6b6b6b] font-medium",
   title:
-    "text-[36px] md:text-[44px] lg:text-[48px] leading-[1.15] tracking-[-0.18px] md:tracking-[-0.22px] lg:tracking-[-0.24px] text-[#313131] font-serif",
+    "text-[40px]  md:text-[44px] lg:text-[48px] leading-[1.15] tracking-[-0.18px] md:tracking-[-0.22px] lg:tracking-[-0.24px] text-[#313131] font-serif",
   subtitle:
     "text-[18px] md:text-[20px] lg:text-[24px] leading-tight tracking-[0.135px] md:tracking-[0.15px] lg:tracking-[0.18px] text-[#6b6b6b] font-normal",
-  fontSalt: "font-feature-settings: 'salt'",
 } as const;
 ---
 
 <section class="relative pb-16 pt-20 md:pt-30 md:pb-20 lg:pt-40 lg:pb-20">
-  <div class="container mx-auto px-4 md:px-6 lg:px-20">
+  <div class="w-full md:max-w-5xl lg:max-w-7xl mx-auto px-4 md:px-24 lg:px-20">
     <div class="flex flex-col gap-8 md:gap-12 lg:gap-16 max-w-[1600px] mx-auto">
       <!-- ======================================================================
            Header
            ====================================================================== -->
       <header class="flex flex-col gap-5 md:gap-6 items-start lg:items-center">
-        <span class={STYLES.badge} style={STYLES.fontSalt}>
+        <span class={STYLES.badge}>
           {HEADER.badge}
         </span>
 
         <div class="flex flex-col gap-2 items-start lg:items-center w-full">
-          <h2 class={STYLES.title} style={STYLES.fontSalt}>
+          <h2 class={STYLES.title}>
             {HEADER.title}
           </h2>
-          <p class={STYLES.subtitle} style={STYLES.fontSalt}>
+          <p class={STYLES.subtitle}>
             {HEADER.subtitle}
           </p>
         </div>

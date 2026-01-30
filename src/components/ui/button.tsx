@@ -33,7 +33,8 @@ const buttonVariants = cva(
           "hover:bg-accent hover:text-accent-foreground",
           "dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
         ],
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        secondary:
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "bg-muted/30 text-secondary",
         link: "text-primary underline-offset-4 hover:underline",
 
@@ -45,7 +46,8 @@ const buttonVariants = cva(
         ],
 
         // Navbar variants
-        navbarLight: "bg-white/20 backdrop-blur-sm text-white hover:bg-white/30",
+        navbarLight:
+          "bg-white/20 backdrop-blur-sm text-white hover:bg-white/30",
         navbarDark: "bg-black text-white hover:bg-black/90",
       },
       size: {
@@ -64,7 +66,7 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
+  },
 );
 
 // =============================================================================
@@ -72,8 +74,7 @@ const buttonVariants = cva(
 // =============================================================================
 
 export interface ButtonProps
-  extends React.ComponentProps<"button">,
-    VariantProps<typeof buttonVariants> {
+  extends React.ComponentProps<"button">, VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }
 
@@ -89,9 +90,6 @@ function Button({
 
   // Apply font-feature-settings for hero variants
   const isHeroVariant = variant?.startsWith("hero");
-  const combinedStyle = isHeroVariant
-    ? { fontFeatureSettings: "'salt'", ...style }
-    : style;
 
   return (
     <Comp
@@ -99,7 +97,7 @@ function Button({
       data-variant={variant}
       data-size={size}
       className={cn(buttonVariants({ variant, size, className }))}
-      style={combinedStyle}
+      style={style}
       {...props}
     />
   );

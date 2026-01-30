@@ -46,21 +46,21 @@ interface BannerProps {
 
 function Banner({ config, onClose }: BannerProps) {
   return (
-    <div className="bg-primary text-primary-foreground w-full px-2 py-px text-sm font-medium flex items-center min-h-8">
+    <div className="bg-primary text-primary-foreground w-full px-2 py-px gap-2 text-sm font-medium flex items-center min-h-8">
       <div className="w-10 shrink-0" />
 
-      <div className="flex-1 text-sm flex items-center justify-center min-w-0">
+      <div className="flex-1 text-base flex items-center justify-center min-w-0">
         <span className="truncate space-x-2">
           <span>{config.text}</span>
-          <a
-            href={config.linkHref}
-            className="underline text-violet-400 whitespace-nowrap"
-          >
-            {" "}
-            {config.linkText}
-          </a>
         </span>
       </div>
+      <a
+        href={config.linkHref}
+        className="underline text-violet-400 whitespace-nowrap shrink-0 text-base "
+      >
+        {" "}
+        {config.linkText}
+      </a>
 
       <Button
         onClick={onClose}
@@ -84,11 +84,7 @@ function NavLink({ item, isScrolled }: NavLinkProps) {
   const colorStyles = isScrolled ? "text-[#313131]" : "text-white";
 
   return (
-    <a
-      href={item.href}
-      className={`${baseStyles} ${colorStyles}`}
-      style={{ fontFeatureSettings: "'salt'" }}
-    >
+    <a href={item.href} className={`${baseStyles} ${colorStyles}`}>
       {item.label}
       {item.hasDropdown && <ChevronDown className="w-[18px] h-[18px]" />}
     </a>
@@ -107,12 +103,7 @@ function RequestDemoButton({ isScrolled }: RequestDemoButtonProps) {
     : "bg-white/20 backdrop-blur-sm text-white hover:bg-white/30";
 
   return (
-    <button
-      className={`${baseStyles} ${variantStyles}`}
-      style={{ fontFeatureSettings: "'salt'" }}
-    >
-      Request Demo
-    </button>
+    <button className={`${baseStyles} ${variantStyles}`}>Request Demo</button>
   );
 }
 

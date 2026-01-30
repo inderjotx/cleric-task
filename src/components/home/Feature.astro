@@ -59,35 +59,36 @@ const mobileAlignClass = MOBILE_ALIGN_MAP[imageDirectionMobile];
 const GRADIENT_CONFIG = {
   bottom: {
     position: "bottom-0 left-1/2 -translate-x-1/2",
-    size: "h-[100px] lg:h-[120px] w-full",
-    gradient: "bg-linear-to-t from-[#f8f8f8] to-transparent",
+    size: "h-[100px] lg:h-[150px] w-full",
+    gradient: "bg-linear-to-t from-muted to-transparent",
+    imageContainer: "mx-auto",
   },
   top: {
     position: "top-0 left-1/2 -translate-x-1/2",
     size: "h-[100px] lg:h-[120px] w-full",
-    gradient: "bg-linear-to-b from-[#f8f8f8] to-transparent",
+    gradient: "bg-linear-to-b from-muted to-transparent",
+    imageContainer: "mx-auto",
   },
   left: {
     position: "left-0 inset-y-0",
-    size: "w-[100px] lg:w-[120px] h-full",
-    gradient: "bg-linear-to-r from-[#f8f8f8] to-transparent",
+    size: "w-[150px] lg:w-[200px] h-full",
+    gradient: "bg-linear-to-r from-muted to-transparent",
+    imageContainer: "mr-auto",
   },
   right: {
     position: "right-0 inset-y-0",
-    size: "w-[100px] lg:w-[120px] h-full",
-    gradient: "bg-linear-to-l from-[#f8f8f8] to-transparent",
+    size: "w-[150px] lg:w-[200px] h-full",
+    gradient: "bg-linear-to-l from-muted to-transparent",
+    imageContainer: "ml-auto",
   },
 } as const;
 
-const { position, size, gradient } = GRADIENT_CONFIG[gradientDirection];
+const { position, size, gradient, imageContainer } =
+  GRADIENT_CONFIG[gradientDirection];
 
 // =============================================================================
 // Styles
 // =============================================================================
-
-const STYLES = {
-  fontSalt: "font-feature-settings: 'salt'",
-} as const;
 ---
 
 <div
@@ -101,15 +102,11 @@ const STYLES = {
     class="bg-linear-to-b lg:bg-linear-to-r from-[#f7f9fa] to-[#f8f8f8] flex flex-col gap-5 justify-center px-8 pt-8 pb-0 lg:px-10 lg:py-0 lg:flex-1 lg:max-w-[480px]"
   >
     <h3
-      class="text-[32px] md:text-[40px] leading-[1.2] text-[#313131] font-serif"
-      style={STYLES.fontSalt}
+      class="text-[38px] md:text-[40px] leading-[1.2] text-[#313131] font-serif"
     >
       {title}
     </h3>
-    <p
-      class="text-[16px] md:text-[18px] leading-[1.4] text-[#6b6b6b]"
-      style={STYLES.fontSalt}
-    >
+    <p class="text-[16px] md:text-[18px] leading-[1.4] text-[#6b6b6b]">
       {description}
     </p>
   </div>
@@ -123,7 +120,10 @@ const STYLES = {
   >
     <!-- Image Container -->
     <div
-      class="relative w-full max-w-full lg:w-[600px] lg:mx-auto aspect-square"
+      class:list={[
+        imageContainer,
+        "relative w-full max-w-full lg:w-[600px] aspect-square",
+      ]}
     >
       <Image
         src={image}

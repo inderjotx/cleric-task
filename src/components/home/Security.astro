@@ -50,7 +50,6 @@ const STYLES = {
     "text-[16px] md:text-[18px] lg:text-[18px] leading-[1.4] text-[#313131]",
   linkText: "text-[15px] leading-[1.4] text-[#313131]",
   link: "flex gap-1 items-center text-[15px] leading-[1.4] text-black underline decoration-solid",
-  fontSalt: "font-feature-settings: 'salt'",
 } as const;
 ---
 
@@ -65,29 +64,25 @@ const STYLES = {
       <div class="flex flex-col gap-6 items-start max-w-[560px] w-full">
         <!-- Header -->
         <header class="flex flex-col gap-6 w-full">
-          <span class={STYLES.badge} style={STYLES.fontSalt}>
+          <span class={STYLES.badge}>
             {CONTENT.badge}
           </span>
-          <h2 class={STYLES.title} style={STYLES.fontSalt}>
+          <h2 class={STYLES.title}>
             {CONTENT.title}
           </h2>
         </header>
 
         <!-- Description -->
-        <p class={STYLES.description} style={STYLES.fontSalt}>
+        <p class={STYLES.description}>
           {CONTENT.description}
         </p>
 
         <!-- Trust Center Link -->
         <div class="flex gap-1 items-center">
-          <span class={STYLES.linkText} style={STYLES.fontSalt}>
+          <span class={STYLES.linkText}>
             {CONTENT.link.prefix}
           </span>
-          <a
-            href={CONTENT.link.href}
-            class={STYLES.link}
-            style={STYLES.fontSalt}
-          >
+          <a href={CONTENT.link.href} class={STYLES.link}>
             {CONTENT.link.text}
             <ArrowUpRight className="size-4" />
           </a>

@@ -45,8 +45,8 @@ const TESTIMONIAL = {
 const STYLES = {
   card: "bg-linear-to-t from-[#f8f8f8] to-[#f7f9fa] border border-[#eaeaea] rounded-2xl overflow-hidden max-w-[1192px] mx-auto",
   quote: "text-[#313131] font-normal leading-[1.4]",
-  authorName: "font-semibold text-[18px] leading-[1.4] text-[#313131]",
-  authorTitle: "font-normal text-[18px] leading-[1.4] text-[#313131]",
+  authorName: "font-semibold text-[22px] leading-[1.4] text-[#313131]",
+  authorTitle: "font-normal text-[22px] leading-[1.4] text-[#313131]",
 } as const;
 ---
 
@@ -66,7 +66,7 @@ const STYLES = {
 
         <!-- Quote -->
         <blockquote
-          class:list={[STYLES.quote, "text-[28px] tracking-[-0.07px]"]}
+          class:list={[STYLES.quote, "text-[32px] tracking-[-0.07px]"]}
         >
           “
           {TESTIMONIAL.quote}
@@ -104,7 +104,7 @@ const STYLES = {
             href={TESTIMONIAL.cta.href}
             class:list={[
               buttonVariants({ variant: "default", size: "default" }),
-              "self-start md:self-auto md:shrink-0",
+              "self-start md:self-auto md:shrink-0 text-[22px]  px-6 py-6             ",
             ]}
           >
             {TESTIMONIAL.cta.text}

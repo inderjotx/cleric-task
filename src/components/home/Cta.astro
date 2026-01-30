@@ -22,7 +22,8 @@ import ctaDesktop from "@/assets/cta/desktop.png";
 
 const CONTENT = {
   title: "Unblock your engineers. Start in minutes.",
-  subtitle: "Setup takes minutes. Read-only by default.",
+  subtitle:
+    "Connect with a scoped, read-only service account. No code changes.",
   buttons: [
     {
       label: "Start for free",
@@ -42,28 +43,17 @@ const CONTENT = {
 // =============================================================================
 
 const STYLES = {
-  section: "relative py-10 pb-20 md:py-15 md:pb-30 lg:py-20 lg:pb-40",
-  container: "container mx-auto px-4 md:px-24 lg:px-20",
-  card: "relative overflow-hidden rounded-2xl w-full max-w-[1192px] mx-auto",
-  contentWrapper: "relative z-10 px-8 py-24 md:px-12 md:py-40 lg:p-30",
-  contentInner:
-    "flex flex-col gap-12 md:gap-14 lg:gap-12 max-w-[380px] lg:max-w-[480px]",
-  textGroup: "flex flex-col gap-4 md:gap-6 lg:gap-4 text-white",
-  title:
-    "text-[36px] md:text-[48px] lg:text-[48px] leading-[1.15] tracking-[-1.08px] md:tracking-[-1.44px] lg:tracking-[-1.44px] font-serif font-medium",
-  subtitle:
-    "text-[18px] md:text-[20px] lg:text-[24px] leading-tight tracking-[0.135px] md:tracking-[0.15px] lg:tracking-[0.18px] font-normal",
-  buttonGroup: "flex flex-col md:flex-row gap-5",
   button:
     "px-6 py-2.5 rounded-full text-[15px] font-medium leading-[1.4] text-center min-w-[160px]",
-  fontSalt: "font-feature-settings: 'salt'",
 } as const;
 ---
 
-<section class={STYLES.section}>
-  <div class={STYLES.container}>
+<section class="relative pb-20 md:pb-15 md:pb-30 lg:pb-40">
+  <div class="w-full md:max-w-5xl lg:max-w-7xl mx-auto px-4 md:px-24 lg:px-20">
     <!-- CTA Card -->
-    <div class={STYLES.card}>
+    <div
+      class="relative overflow-hidden rounded-2xl w-full max-w-[1192px] mx-auto"
+    >
       <!-- ====================================================================
            Background Images - Responsive
            ==================================================================== -->
@@ -101,32 +91,39 @@ const STYLES = {
       <!-- ====================================================================
            Content
            ==================================================================== -->
-      <div class={STYLES.contentWrapper}>
-        <div class={STYLES.contentInner}>
+      <div
+        class="relative flex flex-col gap-10 z-10 px-8 py-24 md:px-12 md:py-40 lg:p-30"
+      >
+        <div
+          class="flex flex-col gap-12 md:gap-14 lg:gap-12 max-w-[350px] md:max-w-[400px] lg:max-w-[480px]"
+        >
           <!-- Text Content -->
-          <div class={STYLES.textGroup}>
-            <h2 class={STYLES.title}>
+          <div class="flex flex-col gap-4 md:gap-6 lg:gap-4 text-white">
+            <h2
+              class="text-[40px] md:text-[48px] lg:text-[48px] leading-[1.15] tracking-[-1.08px] md:tracking-[-1.44px] lg:tracking-[-1.44px] font-serif font-medium"
+            >
               {CONTENT.title}
             </h2>
-            <p class={STYLES.subtitle} style={STYLES.fontSalt}>
+            <p
+              class="text-[18px] md:text-[20px] lg:text-[24px] leading-tight tracking-[0.135px] md:tracking-[0.15px] lg:tracking-[0.18px] font-normal"
+            >
               {CONTENT.subtitle}
             </p>
           </div>
 
           <!-- Buttons -->
-          <div class={STYLES.buttonGroup}>
-            {
-              CONTENT.buttons.map((button) => (
-                <a
-                  href={button.href}
-                  class={`${buttonVariants({ variant: button.variant })} ${STYLES.button}`}
-                  style={STYLES.fontSalt}
-                >
-                  {button.label}
-                </a>
-              ))
-            }
-          </div>
+        </div>
+        <div class="flex flex-col md:flex-row gap-5">
+          {
+            CONTENT.buttons.map((button) => (
+              <a
+                href={button.href}
+                class={`${buttonVariants({ variant: button.variant })} ${STYLES.button} `}
+              >
+                {button.label}
+              </a>
+            ))
+          }
         </div>
       </div>
     </div>

@@ -82,25 +82,10 @@ const SOCIAL_LINKS: SocialLink[] = [
 ];
 
 const COPYRIGHT = "© Cleric 2025";
-
-// =============================================================================
-// Styles
-// =============================================================================
-
-const STYLES = {
-  footer: "relative py-6",
-  container: "container mx-auto px-4 md:px-24 lg:px-0 lg:max-w-[1192px]",
-  columnTitle: "text-[15px] leading-[1.4] text-black font-semibold",
-  link: "text-[15px] leading-[1.4] text-black hover:opacity-85 transition-opacity",
-  socialLink: "opacity-60 hover:opacity-85 transition-opacity",
-  socialIcon: "w-5 h-5",
-  copyright: "text-[15px] leading-[1.4] text-[#939393]",
-  fontSalt: "font-feature-settings: 'salt'",
-} as const;
 ---
 
-<footer class={STYLES.footer}>
-  <div class={STYLES.container}>
+<footer class="relative py-6">
+  <div class="w-full md:max-w-5xl lg:max-w-7xl mx-auto px-4 md:px-24 lg:px-20">
     <!-- ========================================================================
          Desktop Layout (lg+)
          ======================================================================== -->
@@ -117,21 +102,6 @@ const STYLES = {
             />
           </a>
         </div>
-        <!-- Social Icons -->
-        <div class="flex gap-4 items-center">
-          {
-            SOCIAL_LINKS.map((social) => (
-              <a href={social.href} class={STYLES.socialLink}>
-                <Image
-                  src={social.icon}
-                  alt={social.alt}
-                  class={STYLES.socialIcon}
-                  loading="lazy"
-                />
-              </a>
-            ))
-          }
-        </div>
       </div>
 
       <!-- Navigation Columns -->
@@ -139,15 +109,14 @@ const STYLES = {
         {
           NAV_COLUMNS.map((column) => (
             <div class="flex-1 flex flex-col gap-6">
-              <p class={STYLES.columnTitle} style={STYLES.fontSalt}>
+              <p class="text-[15px] leading-[1.4] text-black font-semibold">
                 {column.title}
               </p>
               <div class="flex flex-col gap-2">
                 {column.links.map((link) => (
                   <a
                     href={link.href}
-                    class={STYLES.link}
-                    style={STYLES.fontSalt}
+                    class="text-[15px] leading-[1.4] text-black hover:opacity-85 transition-opacity"
                   >
                     {link.label}
                   </a>
@@ -159,9 +128,27 @@ const STYLES = {
       </div>
 
       <!-- Copyright Row -->
-      <div class="col-span-3"></div>
+      <div class="col-span-3">
+        <div class="flex gap-4 items-center">
+          {
+            SOCIAL_LINKS.map((social) => (
+              <a
+                href={social.href}
+                class="opacity-90 hover:opacity-100 transition-opacity"
+              >
+                <Image
+                  src={social.icon}
+                  alt={social.alt}
+                  class="w-5 h-5"
+                  loading="lazy"
+                />
+              </a>
+            ))
+          }
+        </div>
+      </div>
       <div class="col-span-9 flex items-end">
-        <p class={STYLES.copyright} style={STYLES.fontSalt}>
+        <p class="text-[15px] leading-[1.4] text-gray-800">
           {COPYRIGHT}
         </p>
       </div>
@@ -172,32 +159,15 @@ const STYLES = {
          ======================================================================== -->
     <div class="hidden md:grid md:grid-cols-6 md:gap-4 lg:hidden">
       <!-- Logo Column -->
-      <div class="col-span-1 flex flex-col gap-6">
-        <div class="flex-1">
-          <a href="/">
-            <Image
-              src={logoIcon}
-              alt="Cleric"
-              class="h-8 w-auto"
-              loading="lazy"
-            />
-          </a>
-        </div>
-        <!-- Social Icons -->
-        <div class="flex gap-4 items-center">
-          {
-            SOCIAL_LINKS.map((social) => (
-              <a href={social.href} class={STYLES.socialLink}>
-                <Image
-                  src={social.icon}
-                  alt={social.alt}
-                  class={STYLES.socialIcon}
-                  loading="lazy"
-                />
-              </a>
-            ))
-          }
-        </div>
+      <div class="col-span-1">
+        <a href="/">
+          <Image
+            src={logoIcon}
+            alt="Cleric"
+            class="h-8 w-auto"
+            loading="lazy"
+          />
+        </a>
       </div>
 
       <!-- Navigation Columns -->
@@ -205,15 +175,14 @@ const STYLES = {
         {
           NAV_COLUMNS.map((column) => (
             <div class="flex-1 flex flex-col gap-6">
-              <p class={STYLES.columnTitle} style={STYLES.fontSalt}>
+              <p class="text-[15px] leading-[1.4] text-black font-semibold">
                 {column.title}
               </p>
               <div class="flex flex-col gap-2">
                 {column.links.map((link) => (
                   <a
                     href={link.href}
-                    class={STYLES.link}
-                    style={STYLES.fontSalt}
+                    class="text-[15px] leading-[1.4] text-black hover:opacity-85 transition-opacity"
                   >
                     {link.label}
                   </a>
@@ -224,10 +193,26 @@ const STYLES = {
         }
       </div>
 
-      <!-- Copyright Row -->
-      <div class="col-span-1"></div>
-      <div class="col-span-5 flex items-end pt-4">
-        <p class={STYLES.copyright} style={STYLES.fontSalt}>
+      <!-- Social Icons and Copyright Row -->
+      <div class="col-span-6 grid grid-cols-6 gap-2 pt-4">
+        <div class="flex gap-2 items-center col-span-1">
+          {
+            SOCIAL_LINKS.map((social) => (
+              <a
+                href={social.href}
+                class="opacity-90 hover:opacity-100 transition-opacity"
+              >
+                <Image
+                  src={social.icon}
+                  alt={social.alt}
+                  class="w-5 h-5"
+                  loading="lazy"
+                />
+              </a>
+            ))
+          }
+        </div>
+        <p class="text-[15px] leading-[1.4] text-gray-800 col-span-5">
           {COPYRIGHT}
         </p>
       </div>
@@ -254,15 +239,14 @@ const STYLES = {
         {
           NAV_COLUMNS.slice(0, 2).map((column) => (
             <div class="flex-1 min-w-[150px] flex flex-col gap-4">
-              <p class={STYLES.columnTitle} style={STYLES.fontSalt}>
+              <p class="text-[15px] leading-[1.4] text-black font-semibold">
                 {column.title}
               </p>
               <div class="flex flex-col gap-2">
                 {column.links.map((link) => (
                   <a
                     href={link.href}
-                    class={STYLES.link}
-                    style={STYLES.fontSalt}
+                    class="text-[15px] leading-[1.4] text-black hover:opacity-85 transition-opacity"
                   >
                     {link.label}
                   </a>
@@ -276,7 +260,7 @@ const STYLES = {
       <!-- Use Cases - Split into 2 columns -->
       <div class="flex flex-wrap gap-4">
         <div class="w-full">
-          <p class={`${STYLES.columnTitle} mb-4`} style={STYLES.fontSalt}>
+          <p class="text-[15px] leading-[1.4] text-black font-semibold mb-4">
             {NAV_COLUMNS[2].title}
           </p>
         </div>
@@ -284,7 +268,10 @@ const STYLES = {
         <div class="flex-1 min-w-[150px] flex flex-col gap-2">
           {
             NAV_COLUMNS[2].links.slice(0, 3).map((link) => (
-              <a href={link.href} class={STYLES.link} style={STYLES.fontSalt}>
+              <a
+                href={link.href}
+                class="text-[15px] leading-[1.4] text-black hover:opacity-85 transition-opacity"
+              >
                 {link.label}
               </a>
             ))
@@ -294,7 +281,10 @@ const STYLES = {
         <div class="flex-1 min-w-[150px] flex flex-col gap-2">
           {
             NAV_COLUMNS[2].links.slice(3).map((link) => (
-              <a href={link.href} class={STYLES.link} style={STYLES.fontSalt}>
+              <a
+                href={link.href}
+                class="text-[15px] leading-[1.4] text-black hover:opacity-85 transition-opacity"
+              >
                 {link.label}
               </a>
             ))
@@ -307,18 +297,21 @@ const STYLES = {
         <div class="flex gap-4 items-center">
           {
             SOCIAL_LINKS.map((social) => (
-              <a href={social.href} class={STYLES.socialLink}>
+              <a
+                href={social.href}
+                class="opacity-90 hover:opacity-100 transition-opacity"
+              >
                 <Image
                   src={social.icon}
                   alt={social.alt}
-                  class={STYLES.socialIcon}
+                  class="w-5 h-5"
                   loading="lazy"
                 />
               </a>
             ))
           }
         </div>
-        <p class={STYLES.copyright} style={STYLES.fontSalt}>
+        <p class="text-[15px] leading-[1.4] text-gray-800">
           {COPYRIGHT}
         </p>
       </div>

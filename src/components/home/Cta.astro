@@ -28,12 +28,12 @@ const CONTENT = {
     {
       label: "Start for free",
       href: "#",
-      variant: "heroPrimary" as const,
+      variant: "default" as const,
     },
     {
       label: "Request Demo",
       href: "#",
-      variant: "heroSecondary" as const,
+      variant: "outline" as const,
     },
   ],
 } as const;
@@ -41,11 +41,6 @@ const CONTENT = {
 // =============================================================================
 // Styles
 // =============================================================================
-
-const STYLES = {
-  button:
-    "px-6 py-2.5 rounded-full text-[15px] font-medium leading-[1.4] text-center min-w-[160px]",
-} as const;
 ---
 
 <section class="relative pb-20 md:pb-15 md:pb-30 lg:pb-40">
@@ -118,7 +113,7 @@ const STYLES = {
             CONTENT.buttons.map((button) => (
               <a
                 href={button.href}
-                class={`${buttonVariants({ variant: button.variant })} ${STYLES.button} `}
+                class={buttonVariants({ variant: button.variant, size: "default" })}
               >
                 {button.label}
               </a>

@@ -49,22 +49,24 @@ function Banner({ config, onClose }: BannerProps) {
     <div className="bg-primary text-primary-foreground w-full px-2 py-px gap-2 text-sm font-medium flex items-center min-h-8">
       <div className="w-10 shrink-0" />
 
-      <div className="flex-1 text-base flex items-center justify-center min-w-0">
+      <div className="flex-1 text-sm flex items-center justify-center min-w-0 gap-2">
         <span className="truncate space-x-2">
           <span>{config.text}</span>
         </span>
+        <a
+          href={config.linkHref}
+          className="underline text-violet-400 whitespace-nowrap shrink-0 text-base "
+        >
+          {" "}
+          {config.linkText}
+        </a>
       </div>
-      <a
-        href={config.linkHref}
-        className="underline text-violet-400 whitespace-nowrap shrink-0 text-base "
-      >
-        {" "}
-        {config.linkText}
-      </a>
 
       <Button
         onClick={onClose}
-        className="shrink-0 ml-2 p-2 hover:opacity-70 transition-opacity"
+        variant="ghost"
+        size="icon-sm"
+        className="shrink-0 ml-2 hover:opacity-70 transition-opacity"
         aria-label="Close banner"
       >
         <X className="w-4 h-4 text-gray-400" />
@@ -96,14 +98,10 @@ interface RequestDemoButtonProps {
 }
 
 function RequestDemoButton({ isScrolled }: RequestDemoButtonProps) {
-  const baseStyles =
-    "px-4 py-1.5 rounded-full text-[15px] font-medium leading-[1.4] transition-colors";
-  const variantStyles = isScrolled
-    ? "bg-black text-white hover:bg-black/90"
-    : "bg-white/20 backdrop-blur-sm text-white hover:bg-white/30";
-
   return (
-    <button className={`${baseStyles} ${variantStyles}`}>Request Demo</button>
+    <Button variant={isScrolled ? "dark" : "outline"} size="sm">
+      Request Demo
+    </Button>
   );
 }
 

@@ -38,9 +38,9 @@ const CONTENT = {
     {
       text: "Try it out",
       href: "/try-it-out",
-      variant: "heroPrimary" as const,
+      variant: "default" as const,
     },
-    { text: "Request Demo", href: "#", variant: "heroSecondary" as const },
+    { text: "Request Demo", href: "#", variant: "outline" as const },
   ],
 } as const;
 
@@ -146,7 +146,7 @@ const STYLES = {
 
         <!-- CTA Buttons -->
         <div
-          class="flex items-center justify-center gap-2 md:gap-6 lg:gap-8 w-full"
+          class="grid grid-cols-2 max-w-[500px] md:max-w-[400px] gap-2 md:gap-6 lg:gap-8 w-full"
         >
           {
             CONTENT.buttons.map((button) => (
@@ -154,7 +154,7 @@ const STYLES = {
                 href={button.href}
                 class={buttonVariants({
                   variant: button.variant,
-                  size: "hero",
+                  size: "lg",
                 })}
               >
                 {button.text}
